@@ -374,7 +374,7 @@ summary {
 <p>C++ introductory course from Codecademy is 61% completed. Notes from the first 5 sections (hello world, variables, conditionals &amp; logic, loops and vectors):</p>
 <ul>
 <li>possible variables types are: int for integers, double for floating-point numbers, char for individual characters, string for sequence of characters, and bool for true/false</li>
-<li>for loop format is a little different from R, with the counter declared, the bounds of the coutner and the interval of the counter in 3 separate parts. Ex: for (int i = 0; i &lt; vector.size(); i++) {operation}. The i++ means the counter advances by 1.</li>
+<li>for loop format is a little different from R, with the counter declared, the bounds of the counter and the interval of the counter in 3 separate parts. Ex: for (int i = 0; i &lt; vector.size(); i++) {operation}. The i++ means the counter advances by 1.</li>
 <li>if else is very similar to R in terms of syntax</li>
 <li>using vectors requires adding the vector library at the top of the script with #include <vector>, and the type of variable in the vector is declared when the vector is created. Ex: std::vector<int> vector_name = {vector contents}</li>
 <li>to print both variables, plain text and have a line break: std::cout &lt;&lt; variable_name &lt;&lt; “text” &lt;&lt; “”;</li>
@@ -384,9 +384,31 @@ summary {
 </div>
 <div id="applied-time-series-analysis-course-materials" class="section level3">
 <h3>Applied Time Series Analysis course materials</h3>
-<p>Working through Applied Time Series Analysis course materials. No issues with the first section, on matrix manipulation in R.</p>
+<p>Working through Applied Time Series Analysis course materials.</p>
+<div id="section-one" class="section level4">
+<h4>Section One</h4>
+<p>No issues with the first section, on matrix manipulation in R.</p>
 <p>One cool function I hadn’t come across before is diag(), which creates a matrix with zeros except on the diagonal, which is the values you put in diag(); one value means all diagonals will be that value 1, 0, 0, 0, 1, 0, 0, 0, 1, or you can specify each value in the diagonal: 1, 0, 0, 0, 2, 0, 0, 0, 3.</p>
-<p>Section two, linear regression in matrix form, was also a review of concepts I already knew.</p>
+</div>
+<div id="section-two" class="section level4">
+<h4>Section Two</h4>
+<p>Linear regression in matrix form, was mostly also a review of concepts I already knew.</p>
+<p>Notes * not sure I completely understand what matrix form 2 is used for; is it for mixed effects models? I understand how the math works, just not completely clear on the functionality - it is purely used for time series?</p>
+</div>
+<div id="section-three" class="section level4">
+<h4>Section Three</h4>
+<p>Intro to time series - should definitely be just a review</p>
+<ul>
+<li>Time series are characterized by being an ordered data set, with autocorrelation of some kind</li>
+<li>model time series as a combination of trend (m_t), seasonal component (s_t) and remainder (error or noise; e_t); x_t = m_t + s_t + e_t</li>
+<li>types of trend: moving average (easily scalable)</li>
+<li>once you have an estimate for trend, find s_t by using s_t = x_t - m_t (in this scenario, s_t actually includes e_t)</li>
+<li>once you have s_t, e_t = x_t - m_t - s_t; not sure I totally understand this, if the s_t above was s_t + e_t, essentially. I guess you use all of the x_ts to estimate a mean s_t and then use that? Looks like this is the case, yes.</li>
+</ul>
+</div>
+<div id="section-four" class="section level4">
+<h4>Section Four</h4>
+</div>
 </div>
 <div id="indigenous-statistics-book-notes" class="section level3">
 <h3>Indigenous Statistics book notes</h3>
@@ -408,12 +430,30 @@ summary {
 <li>The abundance-index has had to be model-based because of differences in equipment between survey vessels, which affects catchability (so raw data wouldn’t be comparable)</li>
 <li>they were using an R package called nwfscDeltaGLM to create these model-based index standardization, and they had research indicating that treating the interaction of spatial stratum and year as a random effect was robust in terms of “spatial variability” (does this mean habitat variation across a unit of space? Or just any kind of variation between strata? Or maybe variation of population within a strata?) and low sample sizes in some strata. However, using this technique still required defining spatial strata “a priori” (“relating to or denoting reasoning or knowledge which proceeds from theoretical deduction rather than from observation or experience” - making uninformed strata decisions, basically), and didn’t include information about which strata were next to one another</li>
 <li>In an attempt to address these two issues, Shelton et al. (2014) tried a spatially-explicit model and found that it explained a lot of residual variation “by accounting for variable population density within existing spatial strata” but this method took a long time to run the model</li>
-<li>VAST grew out of several packages, including from Kristensen et al. (2014), which produced the Template Model Builder (TMB) package for mixed-effects models, and the R-INLA package (Illian et al., 2012), which used stochastic partial differential equation approximation (SPDE) for spatio-temporal processes. Thorson et al. (2014b) efficiently implemented SPDE approximation with TMB, and introduced a new package SpatialDeltaGLMM tht produced single-species index standardization models with either spatio-temporal effects or just spatial effects. At the same time, spatial factors analysis was introduced (Thorson et al. 2015b), used for estimating covariation for multiple species in a single time interval (Spatial_FA), and the next year they expanded this to account for both spatial and spatio-temporal covariation (SpatialDFA). In 2017, Thorson and Barnett merged all features of SpatialDeltaGLMM, Spatial_FA and SpatialDFA into a single R package, VAST</li>
+<li>VAST grew out of several packages, including from Kristensen et al. (2014), which produced the Template Model Builder (TMB) package for mixed-effects models, and the R-INLA package (Illian et al., 2012), which used stochastic partial differential equation approximation (SPDE) for spatio-temporal processes. Thorson et al. (2014b) efficiently implemented SPDE approximation with TMB, and introduced a new package SpatialDeltaGLMM that produced single-species index standardization models with either spatio-temporal effects or just spatial effects. At the same time, spatial factors analysis was introduced (Thorson et al. 2015b), used for estimating covariation for multiple species in a single time interval (Spatial_FA), and the next year they expanded this to account for both spatial and spatio-temporal covariation (SpatialDFA). In 2017, Thorson and Barnett merged all features of SpatialDeltaGLMM, Spatial_FA and SpatialDFA into a single R package, VAST</li>
 <li>VAST also includes features from MIST, a package that estimates species interactions</li>
 <li>More features continue to be added, but with the intention that it will always be backwards compatible, so old code should always run with no or minimal modifications</li>
 <li>VAST has mostly been used in stock assessments so far, not ecosystem or climate assessments, but that may just be reflective that these analyses are done less often and VAST has only been around for a few years.</li>
 <li>Applications of VAST for fisheries management have only occurred in the Gulf of Alaska, Eastern Bering Sea, US West Coast and South Africa so far.</li>
-<li>Four main design principles: <em>area weighting</em> (estimate variables occurring over a pre-defined spatial domain; it “predicts population density for all locations within this spatial domain” and then anything derived from that prediction is done with weighting density estimates by the area associated with the estimate), <em>distinct catchability and habitat covariates</em> ()</li>
+<li>Four main design principles: <strong>area weighting</strong> (estimate variables occurring over a pre-defined spatial domain; it “predicts population density for all locations within this spatial domain” and then anything derived from that prediction is done with weighting density estimates by the area associated with the estimate), <strong>distinct catchability and habitat covariates</strong> (these need to be separate because only habitat covariates are used to predict population density within the spatial domain. By doing this, VAST “controls for” i.e. filters out catchability covariates and “conditions upon” i.e. uses info from habitat covariates to improve performance with population density prediction. Previous index standardization methods used a year intercept and treated it as the abundance index, which made all other covariates as “catchability covariates”), <strong>condition on missing covariates</strong> (), <strong>bridge between univariate and multivariate applications</strong> ()</li>
+<li></li>
+</ul>
+</div>
+<div id="vast-tutorial-notes" class="section level2">
+<h2>12/10/2020 VAST tutorial notes</h2>
+<ul>
+<li>KEEP TRACK OF WHICH VAST RELEASE &amp; CPP MODEL FILE VERSION I AM USING when I start actually working on the project code</li>
+<li>if you have both CPUE and AreaSwept_km2, make all AreaSwept_km2 = 1 so it doesn’t account for it twice (CPUE isn’t required, AreaSwept_km2 is enough)</li>
+<li>include a column called “Pass”, with all 0 values (it can break without this, but no one Cecilia knows uses it, and she doesn’t know what it would be used for anyway)</li>
+<li>I’ll probably need to do my own area extractions (instead of using something already loaded in VAST) because of the patchy nature of the trawl area (untrawlable parts and areas more than 700 m deep typically aren’t trawled, so I don’t want to try to extrapolate into these areas) - Region = “user” tells it I’ll be giving it a custom area, and then strata.limits = my_area is where my custom area will be called</li>
+<li>n_x = 500 for 500 knots for spatial analysis - this should be fine</li>
+<li>make_settings() is the function that sets all of the VAST settings</li>
+<li>I’ll want purpose = “index2” (sets a bunch of default settings in order to tell VAST to do an abundance based on index data so I don’t have to go through and set a bunch of settings manually)</li>
+<li>bias.correct = TRUE is a final setting I’ll want, but it adds a lot of computation time, so turn this off when I’m messing with things and just turn it back on for the final run</li>
+<li>use_anisotropy = TRUE is a setting that will take direction into account when calculating autocorrelation, which makes sense in the context of Gulf of Alaska habitat heterogeneity</li>
+<li>in the fit_model function, “input_grid” is for my custom extrapolation grid, which Cecilia already has a .csv file for and code to turn it into the correct format</li>
+<li>for environmental covariates, I can choose non-linear relationships (parametric being a likely choice for some covariates), and they can effect either the encounter probability, the density if encountered, or both (a situation where it is effecting encounter probability but not density, but it could be effecting density but not encounter)</li>
+<li>correlation of environmental covariates is something to look for before using VAST; if there are highly correlated covariates, then use one at a time in VAST and see how much variation is explained by each</li>
 </ul>
 </div>
 

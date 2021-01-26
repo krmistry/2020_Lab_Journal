@@ -7,9 +7,7 @@ output:
     keep_md: yes
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 
 ### C++ course 
@@ -39,113 +37,9 @@ Working through Applied Time Series Analysis course materials.
 
 No issues with the first section, on matrix manipulation in R. 
 
-One cool function I hadn't come across before is diag(), which creates a matrix with zeros except on the diagonal, which is the values you put in diag(); one value means all diagonals will be that value `r diag(1, nrow = 3)`, or you can specify each value in the diagonal: `r diag(1:3, nrow = 3)`. 
+One cool function I hadn't come across before is diag(), which creates a matrix with zeros except on the diagonal, which is the values you put in diag(); one value means all diagonals will be that value 1, 0, 0, 0, 1, 0, 0, 0, 1, or you can specify each value in the diagonal: 1, 0, 0, 0, 2, 0, 0, 0, 3. 
 
-```{r ATSA Section 1, eval = FALSE, echo = FALSE}
 
-# 1. Build a 4 × 3 matrix with the numbers 1 through 4 in each row
-matrix_1 <- matrix(rep(1:4, 3), nrow = 3, ncol = 4, byrow = TRUE)
-
-# 2. Extract the elements in the 1st and 2nd rows and 1st and 2nd columns (you’ll have a 2 × 2 
-# matrix). Show the R code that will do this.
-matrix_2 <- matrix_1[1:2, 1:2]
-
-# 3. Build a 4×3 matrix with the numbers 1 through 12 by row (meaning the first row will have the 
-# numbers 1 through 4 in it).
-matrix_3 <- matrix(c(1:12), nrow = 3, ncol = 4, byrow = TRUE)
-
-# 4. Extract the 3rd row of the above. Show R code to do this where you end up with a vector and 
-# how to do this where you end up with a 1 × 3 matrix.
-matrix_4 <- c(matrix_3[3, ]) # or as.vector(matrix_3[3, ])
-matrix_4.b <- as.matrix(matrix_3[3, ], nrow = 3, ncol = 1)
-
-# 5. Build a 4×3 matrix that is all 1s except a 2 in the (2,3) element (2nd row, 3rd column).
-matrix_5 <- matrix(1, nrow = 3, ncol = 4)
-matrix_5[2, 3] <- 2
-
-# 6. Take the transpose of the above.
-matrix_6 <- t(matrix_5)
-
-# 7. Build a 4×4 diagonal matrix with 1 through 4 on the diagonal.
-matrix_7 <- matrix(c(1, rep(0, 4), 2, rep(0, 4), 3, rep(0, 4), 4), nrow = 4, ncol = 4, 
-                   byrow = TRUE)
-# better way to do this: 
-matrix_7 <- diag(1:4)
-
-# 8. Build a 5×5 identity matrix.
-matrix_8 <- diag(1, nrow = 5, ncol = 5) #diag(1, 5) works too, but is more cryptic to look at
-
-# 9. Replace the diagonal in the above matrix with 2 (the number 2).
-diag(matrix_8) <- 2
-
-# 10. Build a matrix with 2 on the diagonal and 1s on the offdiagonals.
-matrix_10 <- matrix(1, nrow = 5, ncol = 5)
-diag(matrix_10) <- 2
-
-# 11. Take the inverse of the above.
-inv_matrix_10 <- solve(matrix_10)
-
-# 12. Build a 3×3 matrix with the first 9 letters of the alphabet. First column should be “a”, “b”, 
-# c”. letters[1:9] gives you these letters.
-matrix_12 <- matrix(letters[1:9], nrow = 3, ncol = 3)
-
-# 13. Replace the diagonal of this matrix with the word “cat”.
-diag(matrix_12) <- "cat"
-
-# 14. Build a 4×3 matrix with all 1s. Multiply by a 3×4 matrix with all 2s.
-matrix_14.a <- matrix(1, nrow = 3, ncol = 4)
-matrix_14.b <- matrix(2, nrow = 4, ncol = 3)
-
-matrix_14.a %*% matrix_14.b
-
-# 15. If A is a 4×3 matrix, is AA possible? Is AA^T possible? Show how to write AA^T in R.
-# AA is not possible (dimensions don't match), but AA^T is possible
-A_15 <- matrix(1, nrow = 3, ncol = 4)
-A_15 %*% t(A_15)
-
-# 16. In the equation, AB=C , let  A=[1 4 7, 2 5 8, 3 6 9]. Build a B matrix with only 1s and 0s 
-# such that the values on the diagonal of C are 1, 8, 6 (in that order). Show your R code for 
-# A, B and  AB.
-A_16 <- matrix(c(1:9), nrow = 3, ncol = 3)
-
-B_16 <- matrix(c(1, 0 , 0, 
-                 0, 0, 1,
-                 0, 1, 0), nrow = 3 , ncol = 3)
-
-A_16 %*% B_16
-
-# 17. Same A matrix as above and same equation AB = C. Build a 3×3 B matrix such that C=2A. So 
-# C=[2 8 14, 4 10 16, 6 12 18]. Hint, B is diagonal.
-C_17 <- 2*A_16 
-B_17 <- diag(2, nrow = 3, ncol = 3)
-
-B_17 %*% A_16
-
-# 18. Same A and AB=C equation. Build a B matrix to compute the row sums of A. So the first `row sum’
-# would be 1+4+7, the sum of all elements in row 1 of A.  C will be [12, 15, 18], the row sums 
-# of A. Hint, B is a column matrix (1 column).
-B_18 <- matrix(1, nrow = 3, ncol = 1)
-
-A_16 %*% B_18
-
-# 19. Same A matrix as above but now equation BA=C. Build a B matrix to compute the column sums of A.
-# So the first `column sum’ would be 1+2+3. C will be a 1x3 matrix.
-B_19 <- matrix(1, nrow = 1, ncol = 3)
-
-B_19 %*% A_16
-
-# 20. Let AB=C equation but A=[2 1 1, 1 2 1, 1 1 2] (so A=diag(3)+1). Build a B matrix such that  
-# C=[3, 3, 3]. Hint, you need to use the inverse of A.
-A_20 <- matrix(1, nrow = 3, ncol = 3)
-diag(A_20) <- 2
-
-C_20 <- matrix(3, nrow = 3, ncol = 1)
-
-B_20 <- solve(A_20) %*% C_20
-
-A_20 %*% B_20
-
-```
 
 #### Section Two 
 
@@ -154,131 +48,7 @@ Linear regression in matrix form, was mostly also a review of concepts I already
 Notes
 * not sure I completely understand what matrix form 2 is used for; is it for mixed effects models? I understand how the math works, just not completely clear on the functionality - it is purely used for time series?
 
-```{r ATSA Section 2, eval = FALSE, echo = FALSE}
 
-library(stats)
-library(MARSS)
-library(datasets)
-
-data(airquality, package="datasets")
-#remove any rows with NAs omitted.
-airquality=na.omit(airquality)
-#make Month a factor (i.e., the Month number is a name rather than a number)
-airquality$Month=as.factor(airquality$Month)
-#add a region factor
-airquality$region = rep(c("north","south"),60)[1:111]
-#Only use 5 data points for the homework so you can show the matrices easily
-homeworkdat = airquality[1:5,]
-
-
-fit = lm(Ozone ~ Wind + Temp, data = homeworkdat)
-
-# 2. For the above model, write out the following R code.
-# a) Create the y and Z matrices in R.
-
-y_matrix <- homeworkdat$Ozone
-
-n <- nrow(homeworkdat)
-Z_matrix <- cbind(rep(1, n), homeworkdat$Wind, homeworkdat$Temp)
-
-# b) Solve for x (the parameters). Show that they match what you get from the first lm() call.
-
-x_parameters <- solve(t(Z_matrix) %*% Z_matrix) %*% t(Z_matrix) %*% y_matrix
-rownames(x_parameters) <- c("Intercept", "Wind", "Temp")
-fit$coefficients
-t(x_parameters)
-
-# 3. Add -1 to your lm() call in question 1:
-
-fit = lm(Ozone ~ -1 + Wind + Temp, data = homeworkdat)
-
-# a) What changes in your model?
-
-# The intercept isn't included as a x parameter
-
-# c) Solve for the parameters (x) and show they match what is returned by lm().
-
-Z_matrix_2 <- cbind(homeworkdat$Wind, homeworkdat$Temp)
-
-x_parameters_2 <- solve(t(Z_matrix_2) %*% Z_matrix_2) %*% t(Z_matrix_2) %*% y_matrix
-rownames(x_parameters_2) <- c("Wind", "Temp")
-fit$coefficients
-t(x_parameters_2)
-
-
-# 4. 
-# b) Adapt the code from subsection 2.3.4 and construct new Z, y and x in R code.
-#make your y and x matrices
-y = matrix(homeworkdat$Ozone, ncol=1)
-x = matrix(c(1, homeworkdat$Wind, homeworkdat$Temp),ncol = 1)
-#make the Z matrix
-n = nrow(homeworkdat) #number of rows in our data file
-k = 2
-#Z has n rows and 1 col for intercept, and n cols for the n air data points
-#a list matrix allows us to combine "characters" and numbers
-Z = matrix(list(0), nrow = n, ncol = k*n+1) 
-Z[ ,1] = "alpha"
-diag(Z[1:n, 1+1:n])="beta_1" 
-diag(Z[1:n, n+1:n+1]) = "beta_2"
-#this function creates that permutation matrix for you
-P = MARSS:::convert.model.mat(Z)$free[,,1]
-M = kronecker(t(x),diag(n))%*%P
-
-# Solve for the parameters using the code from subsection 2.3.4.
-solve(t(M)%*%M)%*%t(M)%*%y
-
-coef(fit)
-# the parameter values match - yay!! :D
-
-# 5. b) Solve for the parameter values and show that they match what you get from the lm() call.
-
-fit = lm(Ozone ~ -1 + region, data = homeworkdat)
-
-Z_matrix_5 <- cbind(c(1, 0, 1, 0, 1), c(0, 1, 0, 1, 0))
-
-x_parameters_5 <- solve(t(Z_matrix_5) %*% Z_matrix_5) %*% t(Z_matrix_5) %*% y_matrix
-rownames(x_parameters_5) <- c("region_north", "region_south")
-fit$coefficients
-t(x_parameters_5)
-
-
-# 6. b) Write out the Z and x in R code.
-y = matrix(homeworkdat$Ozone, ncol = 1)
-x = matrix(c(1), ncol = 1)
-n = nrow(dat)
-# list matrix allows us to combine numbers and character
-# strings
-Z = matrix(list(0), n)
-Z[seq(1, n, 2), 1] = "alphanorth"
-Z[seq(2, n, 2), 1] = "alphasouth"
-
-# c) Solve for the parameter values and show that they match what you get from the lm() call.
-P = MARSS:::convert.model.mat(Z)$free[, , 1]
-M = kronecker(t(x), diag(n)) %*% P
-solve(t(M) %*% M) %*% t(M) %*% y
-
-# parameter values match!
-
-# 8 Using the airquality dataset with 111 data points b) Solve for the parameters
-
-fit = lm(Ozone ~ -1 + Temp:region + Month, data = airquality)
-
-new_y <- matrix(airquality$Ozone, ncol=1)
-new_x <- matrix(c(1, airquality$Temp),ncol=1)
-new_n <- nrow(airquality)
-k = 1
-Z_matrix_8 = matrix(list(0), new_n, k*new_n+1)
-#give the intercepts names based on month
-Z_matrix_8[,1]=paste(airquality$Month)
-#give the betas names based on region 
-diag(Z_matrix_8[1:new_n, 1+1:new_n]) = paste("beta", airquality$region, sep=".")
-P = MARSS:::convert.model.mat(Z_matrix_8)$free[,,1]
-M = kronecker(t(new_x),diag(new_n))%*%P
-solve(t(M)%*%M)%*%t(M)%*%new_y
-
-# parameters match!
-
-```
 
 #### Section Three
 
@@ -293,28 +63,7 @@ Intro to time series - should definitely be just a review
 
 #### Section Four
 
-```{r ATSA Section 4, eval = FALSE, echo = FALSE}
-library(stats)
-library(MARSS)
-library(forecast)
-library(datasets)
-library(atsalibrary)
 
-data(NHTemp, package = "atsalibrary")
-Temp <- NHTemp
-data(MLCO2, package = "atsalibrary")
-CO2 <- MLCO2
-data(hourlyphyto, package = "atsalibrary")
-pDat <- hourlyphyto
-
-# 1 Convert pDat, which is a data.frame object, into a ts object. 
-## what day of 2014 is Dec 1st?
-dBegin <- as.Date("2014-12-01")
-dayOfYear <- (dBegin - as.Date("2014-01-01") + 1)
-
-pDat.ts <- ts(data = pDat, frequency = 24, start = c(1, 8))
-plot.ts(pDat.ts)
-```
 
 
 
