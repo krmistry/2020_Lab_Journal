@@ -1,0 +1,128 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={2020 Lab Journal},
+            pdfauthor={Kelly Mistry},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{2020 Lab Journal}
+\author{Kelly Mistry}
+\date{7/24/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{section}{%
+\subsubsection{7/24/2020}\label{section}}
+
+C++ introductory course from Codecademy is 61\% completed. Notes from
+the first 5 sections (hello world, variables, conditionals \& logic,
+loops and vectors):
+
+\begin{itemize}
+\tightlist
+\item
+  possible variables types are: int for integers, double for
+  floating-point numbers, char for individual characters, string for
+  sequence of characters, and bool for true/false
+\item
+  for loop format is a little different from R, with the counter
+  declared, the bounds of the coutner and the interval of the counter in
+  3 separate parts. Ex: for (int i = 0; i \textless{} vector.size();
+  i++) \{operation\}. The i++ means the counter advances by 1.
+\item
+  if else is very similar to R in terms of syntax
+\item
+  using vectors requires adding the vector library at the top of the
+  script with \#include , and the type of variable in the vector is
+  declared when the vector is created. Ex: std::vector vector\_name =
+  \{vector contents\}
+\item
+  to print both variables, plain text and have a line break: std::cout
+  \textless{}\textless{} variable\_name \textless{}\textless{} ``text''
+  \textless{}\textless{} ``\n'';
+\end{itemize}
+
+\textbf{Cheatsheets for all of the course contents are here:
+\url{https://www.codecademy.com/learn/learn-c-plus-plus/modules/learn-cpp-hello-world/cheatsheet}}
+
+\hypertarget{section-1}{%
+\subsubsection{7/29/2020}\label{section-1}}
+
+Notes from Functions section: * similar structure for R functions, but
+parameter types and return value type needs to be explicitly define:
+return\_value\_type function(parameter\_1\_type parameter\_1,
+parameter\_2\_type parameter\_2) \{ function operation \}
+
+\hypertarget{section-2}{%
+\subsubsection{8/13/2020}\label{section-2}}
+
+Working through Applied Time Series Analysis course materials. No issues
+with the first section, on matrix manipulation in R.
+
+One cool function I hadn't come across before is diag(), which creates a
+matrix with zeros except on the diagonal, which is the values you put in
+diag(); one value means all diagonals will be that value 1, 0, 0, 0, 1,
+0, 0, 0, 1, or you can specify each value in the diagonal: 1, 0, 0, 0,
+2, 0, 0, 0, 3.
+
+\end{document}

@@ -1,0 +1,18 @@
+---
+title: "Vocab Definitions"
+author: "Kelly Mistry"
+date: "1/5/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Miscellaneous Vocabulary 
+
+**Stationarity:** A time series has stationarity if a shift in time doesn’t cause a change in the shape of the distribution. Basic properties of the distribution like the mean, variance and covariance are constant over time.
+
+**Moving average:** 
+
+
